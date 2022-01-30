@@ -1,0 +1,44 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.7'
+
+services:
+  apiback:
+    image: apiback
+    build:
+      context: .
+      dockerfile: apiback/Dockerfile
+    ports:
+      - 5010:5010
+  
+  mvcfront:
+    image: mvcfront
+    build:
+      context: .
+      dockerfile: mvcfront/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - sqldata
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5434:1433"
+ 
+
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.4.6
+    volumes:
+      - ~/mongo:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=sa
+      - MONGO_INITDB_ROOT_PASSWORD=tvxs721#3
+      - MONGO_INITDB_DATABASE=admin   

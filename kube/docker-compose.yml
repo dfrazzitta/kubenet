@@ -1,0 +1,28 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  apiback:
+    image: apiback
+    build:
+      context: .
+      dockerfile: apiback/Dockerfile
+    ports:
+      - 5010:5010
+  
+  mvcfront:
+    image: mvcfront
+    build:
+      context: .
+      dockerfile: mvcfront/Dockerfile
+    ports:
+      - 5000:5000
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5434:1433"

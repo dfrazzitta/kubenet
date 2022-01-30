@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcfront", "mvcfront\mvcfront.csproj", "{F1E23CA4-1D56-4668-933F-7F37B0DD650A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiback", "apiback\apiback.csproj", "{73E366FC-F50B-4340-8F22-404385DB56A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1E23CA4-1D56-4668-933F-7F37B0DD650A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E23CA4-1D56-4668-933F-7F37B0DD650A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E23CA4-1D56-4668-933F-7F37B0DD650A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E23CA4-1D56-4668-933F-7F37B0DD650A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E366FC-F50B-4340-8F22-404385DB56A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E366FC-F50B-4340-8F22-404385DB56A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E366FC-F50B-4340-8F22-404385DB56A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E366FC-F50B-4340-8F22-404385DB56A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
