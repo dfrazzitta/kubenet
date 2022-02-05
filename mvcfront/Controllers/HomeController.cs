@@ -28,7 +28,8 @@ namespace mvcfront.Controllers
         {
             return View();
         }
-
+        // put polly
+        
         using (var client1 = new System.Net.Http.HttpClient())
             {
                 // Call *mywebapi*, and display its response in the page
@@ -53,8 +54,33 @@ namespace mvcfront.Controllers
             _logger = logger;
         }
 
-        public async Task<ContentResult> CallApi()
+        //public async Task<ContentResult> CallApi()
+        //public IActionResult CallApi()
+        public async Task<IActionResult> CallApi()
         {
+
+            using (var client1 = new System.Net.Http.HttpClient())
+            {
+                
+                // Call *mywebapi*, and display its response in the page
+                var request = new System.Net.Http.HttpRequestMessage();
+                // requcd ..est.RequestUri = new Uri("http://kapi/WeatherForecast/saveme"); // ASP.NET 3 (VS 2019 only)
+                //string uriApi = "http://localhost:5001/weatherforecast/";
+                string uriApi = "http://apiback:5001/weatherforecast/";
+                request.RequestUri = new Uri(uriApi); // ASP.NET 3 (VS 2019 only)
+
+                // request.RequestUri = new Uri("http://kapi/api/KubernetesSystem/GetSystemData"); // ASP.NET 3 (VS 2019 only)
+                //request.RequestUri = new Uri("http://kapi/api/WeatherForecast/"); // ASP.NET 2.x
+                var response = await client1.SendAsync(request);
+                var resp = await response.Content.ReadAsStringAsync();
+                _logger.LogDebug(resp);
+                ViewData["json"] = resp;
+                //return Content(resp); //View(resp);
+
+            }
+
+            return View();
+            /*
 
             using (var client1 = new System.Net.Http.HttpClient())
             {
@@ -73,6 +99,7 @@ namespace mvcfront.Controllers
                 return Content(resp); //View(resp);
 
             }
+            */
            // return View();
         }
 

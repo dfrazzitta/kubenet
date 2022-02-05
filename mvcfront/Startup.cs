@@ -16,9 +16,12 @@ namespace mvcfront
 {
     public class Startup
     {
+        private string _flag;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+             _flag = Configuration.GetValue<string>("sqlChoice");
         }
 
         public IConfiguration Configuration { get; }
@@ -28,9 +31,21 @@ namespace mvcfront
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<SchoolContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("sqldata")));
-
+             if (_flag.CompareTo("SchoolContext")==0) 
+            {
+                services.AddDbContext<SchoolContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("sqldata18")));
+            }
+            if (_flag.CompareTo("sqldatacompose") == 0)
+            {
+                services.AddDbContext<SchoolContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("sqldatacompose")));
+            }
+            if (_flag.CompareTo("mydb") == 0) // in cluster
+            {
+                services.AddDbContext<SchoolContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("mydb")));
+            }
             
 
 
@@ -49,12 +64,12 @@ namespace mvcfront
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+          //  app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

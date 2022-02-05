@@ -1,0 +1,79 @@
+services:
+  apiback:
+    build:
+      context: L:\kubenet
+      dockerfile: apiback/Dockerfile
+    image: apiback
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5001
+      published: 5001
+      protocol: tcp
+  mongodb:
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_PASSWORD: tvxs721#3
+      MONGO_INITDB_ROOT_USERNAME: sa
+    image: mongo:4.4.6
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 27017
+      published: 27017
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\Administrator\mongo
+      target: /data/db
+      bind:
+        create_host_path: true
+  mvcfront:
+    build:
+      context: L:\kubenet
+      dockerfile: mvcfront/Dockerfile
+    depends_on:
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: mvcfront
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      protocol: tcp
+    - mode: ingress
+      target: 5000
+      published: 5000
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\Administrator\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+  sqldata:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Pass@word
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: 1433
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose2164956753745373429_default

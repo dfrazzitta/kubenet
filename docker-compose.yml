@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: apiback/Dockerfile
     ports:
-      - 5010:5010
+      - 5001:5001
   
   mvcfront:
     image: mvcfront
@@ -27,7 +27,7 @@ services:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
-      - "5434:1433"
+      - "1433:1433"
  
 
 

@@ -2,27 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f docker-compose.yml
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
     io.kompose.service: mvcfront
   name: mvcfront
 spec:
-# minReadySeconds
-# paused
-# progressDeadlinSeconds default 600s --- 10 min 
-# revisionHistoryLimit  default 10  -- list # for old replicasets
-# selector -- Pod selector --- must match the pods template labels
-# strategy -- 
-#   type: 😃️Recreate   
-#   type: 😃️RollingUpdate
-#   RollingUpdate:
-#     maxsurge: 2
-#     maxUnavailable: 0
-# blue/green 2 deployments - switch service
-# Canary - just deploy a deployment with new image -- % id based on # of pods
-# A/B - 2 diff deployments - decisions makde from data
   replicas: 1
   selector:
     matchLabels:
@@ -31,29 +17,12 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f docker-compose.yml
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
         io.kompose.service: mvcfront
     spec:
-#     activeDeadlineSeconds:  time to fail
-#     affinity - nodeafinity - podAffinity - podAntiAffinity
-#       preferredDuringSchedulingIgnoredDuring   -- requiredDuringSchedulingIgnoredDuring
-#     dnsConfig - dnsPolicy
-#     enableServiceLinks: put service info in pod - true default
-#     ephemeralContainers:   (feature gate)
-#     hostAliases - hostIPC - hostnatwork -HostPID -  hostname
-#     imagePullSecrets
-#     initContainer
-#     nodeName
-#     nodeSelector: disktype: ssd 
-#     preemptionPolicy - Never, PreemptLowerPriority
-#     priority: populates from priorityClassName
-#     readinessgates
-
-    
-    
       containers:
       - image: mvcfront
         imagePullPolicy: ""

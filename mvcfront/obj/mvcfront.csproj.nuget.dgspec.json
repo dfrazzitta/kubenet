@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/dave/k1/kubenet/mvcfront/mvcfront.csproj": {}
+    "/home/dave/kubenet/mvcfront/mvcfront.csproj": {}
   },
   "projects": {
-    "/home/dave/k1/kubenet/mvcfront/mvcfront.csproj": {
+    "/home/dave/kubenet/mvcfront/mvcfront.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/dave/k1/kubenet/mvcfront/mvcfront.csproj",
+        "projectUniqueName": "/home/dave/kubenet/mvcfront/mvcfront.csproj",
         "projectName": "mvcfront",
-        "projectPath": "/home/dave/k1/kubenet/mvcfront/mvcfront.csproj",
+        "projectPath": "/home/dave/kubenet/mvcfront/mvcfront.csproj",
         "packagesPath": "/home/dave/.nuget/packages/",
-        "outputPath": "/home/dave/k1/kubenet/mvcfront/obj/",
+        "outputPath": "/home/dave/kubenet/mvcfront/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dave/.nuget/NuGet/NuGet.Config"
@@ -63,6 +63,18 @@
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.14.0, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f1e23ca4-1d56-4668-933f-7f37b0dd650a": {
+      "ProjectGuid": "f1e23ca4-1d56-4668-933f-7f37b0dd650a",
+      "DisplayName": "mvcfront",
+      "ColorIndex": 0
+    },
+    "73e366fc-f50b-4340-8f22-404385db56a5": {
+      "ProjectGuid": "73e366fc-f50b-4340-8f22-404385db56a5",
+      "DisplayName": "apiback",
+      "ColorIndex": 1
+    },
+    "81fbed57-be8b-45b4-b77c-884c6a861c51": {
+      "ProjectGuid": "81fbed57-be8b-45b4-b77c-884c6a861c51",
+      "DisplayName": "docker-compose",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
