@@ -26,6 +26,7 @@ namespace mvcfront
 
         private static void CreateDbIfNotExists(IHost host)
         {
+            // this is a commit
             using IServiceScope scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
             try
