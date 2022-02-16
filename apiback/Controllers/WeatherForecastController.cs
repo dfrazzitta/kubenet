@@ -56,7 +56,8 @@ namespace apiback.Controllers
       //  public List<WeatherForecast> Get()
       // public HttpResponseMessage Get()
         {
-            return apiback.employees; 
+             
+            return employees; 
          // return Ok(gh);
         }
 
