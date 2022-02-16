@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using mvcfront.Data;
 using Microsoft.EntityFrameworkCore;
-
+using Prometheus;
 
 namespace mvcfront
 {
@@ -31,6 +31,10 @@ namespace mvcfront
         {
             services.AddControllersWithViews();
 
+             services.AddHealthChecks()
+                .AddCheck<RandomResultCheck>("random_check");
+                //.ForwardToPrometheus();
+
              if (_flag.CompareTo("SchoolContext")==0) 
             {
                 services.AddDbContext<SchoolContext>(options =>
@@ -46,9 +50,12 @@ namespace mvcfront
                 services.AddDbContext<SchoolContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("mydb")));
             }
-            
-
-
+            if (_flag.CompareTo("sqldata18") == 0) // in cluster
+            {
+                services.AddDbContext<SchoolContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("sqldata18")));
+            }
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +80,8 @@ namespace mvcfront
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapMetrics();
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

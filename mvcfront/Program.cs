@@ -31,10 +31,17 @@ namespace mvcfront
             var services = scope.ServiceProvider;
             try
             {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError("Enter CreateDbIfNotExists");
+
+
                 SchoolContext context = services.GetRequiredService<SchoolContext>();
+                logger.LogError("After CreateDbIfNotExists");
                 
                 bool b = context.Database.EnsureCreated();
+                logger.LogError("be4 initializer CreateDbIfNotExists");
                 DbInitializer.Initialize(context);
+                logger.LogError("after initializer CreateDbIfNotExists");
             }
             catch (Exception ex)
             {

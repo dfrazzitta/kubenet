@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[1.14.0, )"
             },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
             "prometheus-net.AspNetCore": {
               "target": "Package",
               "version": "[5.0.2, )"

@@ -10,6 +10,8 @@ using mvcfront.Data;
 using mvcfront.Models.SchoolViewModels;
 using System.Data.Common;
 using Microsoft.Extensions.Logging;
+using Polly;
+using System.Net.Http;
 
 
 
@@ -18,34 +20,7 @@ namespace mvcfront.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-/*
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-        // put polly
-        
-        using (var client1 = new System.Net.Http.HttpClient())
-            {
-                // Call *mywebapi*, and display its response in the page
-                var request = new System.Net.Http.HttpRequestMessage();
-                // request.RequestUri = new Uri("http://kapi/WeatherForecast/saveme"); // ASP.NET 3 (VS 2019 only)
-                string uriApi = "http://faApi/kubernetessystem/" + KubeType;
-                request.RequestUri = new Uri(uriApi); // ASP.NET 3 (VS 2019 only)
-
-                // request.RequestUri = new Uri("http://kapi/api/KubernetesSystem/GetSystemData"); // ASP.NET 3 (VS 2019 only)
-                //request.RequestUri = new Uri("http://kapi/api/WeatherForecast/"); // ASP.NET 2.x
-                var response = await client1.SendAsync(request);
-                var resp = await response.Content.ReadAsStringAsync();
-                return resp;
-            }
-*/
-  
+   
         private readonly SchoolContext _context;
 
         public HomeController(SchoolContext context, ILogger<HomeController> logger)
@@ -58,49 +33,30 @@ namespace mvcfront.Controllers
         //public IActionResult CallApi()
         public async Task<IActionResult> CallApi()
         {
-
-            using (var client1 = new System.Net.Http.HttpClient())
+         
+            using (var httpClient = new HttpClient())
             {
-                
-                // Call *mywebapi*, and display its response in the page
-                var request = new System.Net.Http.HttpRequestMessage();
-                // requcd ..est.RequestUri = new Uri("http://kapi/WeatherForecast/saveme"); // ASP.NET 3 (VS 2019 only)
-                //string uriApi = "http://localhost:5001/weatherforecast/";
-                string uriApi = "http://apiback:5001/weatherforecast/";
-                request.RequestUri = new Uri(uriApi); // ASP.NET 3 (VS 2019 only)
+                var maxRetryAttempts = 3;
+                var pauseBetweenFailures = TimeSpan.FromSeconds(2);
 
-                // request.RequestUri = new Uri("http://kapi/api/KubernetesSystem/GetSystemData"); // ASP.NET 3 (VS 2019 only)
-                //request.RequestUri = new Uri("http://kapi/api/WeatherForecast/"); // ASP.NET 2.x
-                var response = await client1.SendAsync(request);
-                var resp = await response.Content.ReadAsStringAsync();
-                _logger.LogDebug(resp);
-                ViewData["json"] = resp;
-                //return Content(resp); //View(resp);
+                var retryPolicy = Policy
+                    .Handle<HttpRequestException>()
+                    .WaitAndRetryAsync(maxRetryAttempts, i => pauseBetweenFailures);
 
+                await retryPolicy.ExecuteAsync(async () =>
+                {
+                    var response = await httpClient
+                    .GetAsync("http://localhost:5001/weatherforecast");
+                    //response.EnsureSuccessStatusCode();
+                    ViewData["json"] = response;
+                });
+                 
+                 
             }
+             
 
-            return View();
-            /*
-
-            using (var client1 = new System.Net.Http.HttpClient())
-            {
-                
-                // Call *mywebapi*, and display its response in the page
-                var request = new System.Net.Http.HttpRequestMessage();
-                // requcd ..est.RequestUri = new Uri("http://kapi/WeatherForecast/saveme"); // ASP.NET 3 (VS 2019 only)
-                //string uriApi = "http://localhost:5001/weatherforecast/";
-                string uriApi = "http://apiback/weatherforecast/";
-                request.RequestUri = new Uri(uriApi); // ASP.NET 3 (VS 2019 only)
-
-                // request.RequestUri = new Uri("http://kapi/api/KubernetesSystem/GetSystemData"); // ASP.NET 3 (VS 2019 only)
-                //request.RequestUri = new Uri("http://kapi/api/WeatherForecast/"); // ASP.NET 2.x
-                var response = await client1.SendAsync(request);
-                var resp = await response.Content.ReadAsStringAsync();
-                return Content(resp); //View(resp);
-
-            }
-            */
-           // return View();
+             return View();
+ 
         }
 
 
