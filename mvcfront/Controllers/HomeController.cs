@@ -12,8 +12,8 @@ using System.Data.Common;
 using Microsoft.Extensions.Logging;
 using Polly;
 using System.Net.Http;
-
-
+using System.Net;
+using System.Text;
 
 namespace mvcfront.Controllers
 {
@@ -63,12 +63,40 @@ namespace mvcfront.Controllers
 
         public IActionResult Index()
         {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+
+            int ct = ipHostInfo.AddressList.Count();
+            StringBuilder sb = new StringBuilder();
+
+            foreach(IPAddress ipx in ipHostInfo.AddressList)
+            {
+                sb.Append(ipx.ToString());
+                sb.Append("  ");
+            }
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+
+            ViewData["ip"] = sb.ToString();
             _logger.LogDebug("enter Index");
             return View();
         }
 
         public async Task<ActionResult> About()
         {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+
+            int ct = ipHostInfo.AddressList.Count();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (IPAddress ipx in ipHostInfo.AddressList)
+            {
+                sb.Append(ipx.ToString());
+                sb.Append("  ");
+            }
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+
+            ViewData["ip"] = sb.ToString();
+
+
             List<EnrollmentDateGroup> groups = new List<EnrollmentDateGroup>();
             var conn = _context.Database.GetDbConnection();
             try

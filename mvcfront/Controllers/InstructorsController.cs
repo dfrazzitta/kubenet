@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,6 +25,20 @@ namespace mvcfront.Controllers
         // GET: Instructors
         public async Task<IActionResult> Index(int? id, int? courseID)
         {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+
+            int ct = ipHostInfo.AddressList.Count();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (IPAddress ipx in ipHostInfo.AddressList)
+            {
+                sb.Append(ipx.ToString());
+                sb.Append("  ");
+            }
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+
+            ViewData["ip"] = sb.ToString();
+
             var viewModel = new InstructorIndexData();
             viewModel.Instructors = await _context.Instructors
                   .Include(i => i.OfficeAssignment)

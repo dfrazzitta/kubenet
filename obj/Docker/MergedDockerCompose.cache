@@ -1,7 +1,7 @@
 services:
   apiback:
     build:
-      context: L:\kubenet
+      context: G:\f16kube\kubenet
       dockerfile: apiback/Dockerfile
     image: apiback
     networks:
@@ -11,29 +11,9 @@ services:
       target: 5001
       published: 5001
       protocol: tcp
-  mongodb:
-    container_name: mongodb
-    environment:
-      MONGO_INITDB_DATABASE: admin
-      MONGO_INITDB_ROOT_PASSWORD: tvxs721#3
-      MONGO_INITDB_ROOT_USERNAME: sa
-    image: mongo:4.4.6
-    networks:
-      default: null
-    ports:
-    - mode: ingress
-      target: 27017
-      published: 27017
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: C:\Users\Administrator\mongo
-      target: /data/db
-      bind:
-        create_host_path: true
   mvcfront:
     build:
-      context: L:\kubenet
+      context: G:\f16kube\kubenet
       dockerfile: mvcfront/Dockerfile
     depends_on:
       sqldata:
@@ -76,4 +56,4 @@ services:
       protocol: tcp
 networks:
   default:
-    name: dockercompose2164956753745373429_default
+    name: dockercompose5428643214091499088_default

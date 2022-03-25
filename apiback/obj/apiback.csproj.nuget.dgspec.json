@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/dave/kubenet/apiback/apiback.csproj": {}
+    "G:\\f16kube\\kubenet\\apiback\\apiback.csproj": {}
   },
   "projects": {
-    "/home/dave/kubenet/apiback/apiback.csproj": {
+    "G:\\f16kube\\kubenet\\apiback\\apiback.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/dave/kubenet/apiback/apiback.csproj",
+        "projectUniqueName": "G:\\f16kube\\kubenet\\apiback\\apiback.csproj",
         "projectName": "apiback",
-        "projectPath": "/home/dave/kubenet/apiback/apiback.csproj",
-        "packagesPath": "/home/dave/.nuget/packages/",
-        "outputPath": "/home/dave/kubenet/apiback/obj/",
+        "projectPath": "G:\\f16kube\\kubenet\\apiback\\apiback.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "G:\\f16kube\\kubenet\\apiback\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/home/dave/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\ServiceFabricSDK.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files\\Microsoft SDKs\\Service Fabric\\packages": {},
+          "c:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -95,6 +102,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.14, 5.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -103,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

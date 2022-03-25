@@ -11,6 +11,7 @@ using mvcfront.Data;
 using mvcfront.Models;
  using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace mvcfront.Controllers
 {
@@ -27,6 +28,19 @@ namespace mvcfront.Controllers
         // GET: Enrollment
         public ActionResult Index()
         {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+
+            int ct = ipHostInfo.AddressList.Count();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (IPAddress ipx in ipHostInfo.AddressList)
+            {
+                sb.Append(ipx.ToString());
+                sb.Append("  ");
+            }
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+
+            ViewData["ip"] = sb.ToString();
             var enrollments = _context.Enrollments.Include(e => e.Course).Include(e => e.Student);
             return View(enrollments.ToList());
         }

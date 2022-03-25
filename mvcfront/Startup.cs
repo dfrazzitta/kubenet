@@ -31,11 +31,16 @@ namespace mvcfront
         {
             services.AddControllersWithViews();
 
-             services.AddHealthChecks()
-                .AddCheck<RandomResultCheck>("random_check");
-                //.ForwardToPrometheus();
+            // services.AddHealthChecks()
+            //   .AddCheck<RandomResultCheck>("random_check");
+            //.ForwardToPrometheus();
 
-             if (_flag.CompareTo("SchoolContext")==0) 
+            if (_flag.CompareTo("Vmsql") == 0)
+            {
+                services.AddDbContext<SchoolContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Vmsql")));
+            }
+            if (_flag.CompareTo("SchoolContext")==0) 
             {
                 services.AddDbContext<SchoolContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sqldata18")));
@@ -45,10 +50,10 @@ namespace mvcfront
                 services.AddDbContext<SchoolContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sqldatacompose")));
             }
-            if (_flag.CompareTo("mydb") == 0) // in cluster
+            if (_flag.CompareTo("kubedb") == 0) // in cluster
             {
                 services.AddDbContext<SchoolContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("mydb")));
+                    options.UseSqlServer(Configuration.GetConnectionString("kubedb")));
             }
             if (_flag.CompareTo("sqldata18") == 0) // in cluster
             {
@@ -81,7 +86,7 @@ namespace mvcfront
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapMetrics();
-                endpoints.MapHealthChecks("/health");
+             //   endpoints.MapHealthChecks("/health");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
