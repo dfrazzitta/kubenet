@@ -15,7 +15,17 @@
       "ProjectGuid": "81fbed57-be8b-45b4-b77c-884c6a861c51",
       "DisplayName": "docker-compose",
       "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "519312b6-bb0f-4574-896b-7443422b8b02": {
+      "ProjectGuid": "519312b6-bb0f-4574-896b-7443422b8b02",
+      "DisplayName": "TestApp",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

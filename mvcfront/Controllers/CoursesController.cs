@@ -25,7 +25,7 @@ namespace mvcfront.Controllers
         public async Task<IActionResult> Index()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
-
+             
             int ct = ipHostInfo.AddressList.Count();
             StringBuilder sb = new StringBuilder();
 

@@ -55,3 +55,5 @@ G:\f16kube\kubenet\bin\Debug\apiback.pdb
 G:\f16kube\kubenet\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 G:\f16kube\kubenet\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 G:\f16kube\kubenet\obj\Debug\docker-compose.dcproj.CopyComplete
+G:\f16kube\kubenet\bin\Debug\Prometheus.NetStandard.dll
+G:\f16kube\kubenet\bin\Debug\Prometheus.AspNetCore.dll

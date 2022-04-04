@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using mvcfront.Data;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;
+using mvcfront.prometheus;
 
 namespace mvcfront
 {
@@ -30,10 +31,12 @@ namespace mvcfront
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHealthChecks();
 
             // services.AddHealthChecks()
             //   .AddCheck<RandomResultCheck>("random_check");
             //.ForwardToPrometheus();
+            //_flag = "Vmsql";
 
             if (_flag.CompareTo("Vmsql") == 0)
             {
@@ -81,12 +84,53 @@ namespace mvcfront
 
             app.UseRouting();
 
-          //  app.UseAuthorization();
+           //  app.UseAuthorization();
+           // app.UseHttpMetrics();
+            
+            app.UseRequestMiddleware();
+            app.UseGaugeMiddleware();
 
+ 
+            app.UseMetricServer(5000, "/metrics");
+#if false
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapMetrics();
-             //   endpoints.MapHealthChecks("/health");
+
+                endpoints.MapHealthChecks("/readiness");
+                /*
+                  readinessProbe:
+                  httpGet:
+                    path: /ready
+                    port: 80
+                  successThreshold: 3  */
+
+                endpoints.MapHealthChecks("/liveness");
+                /*
+                  livenessProbe:
+                  httpGet:
+                    path: /healthz
+                    port: 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3  */
+
+
+                endpoints.MapHealthChecks("/startup");
+                /*
+                  startupProbe:
+                  httpGet:
+                    path: /health/startup
+                    port: 80
+                  failureThreshold: 30
+                  periodSeconds: 10
+                */
+
+                endpoints.MapMetrics();
+#endif
+            app.UseEndpoints(endpoints =>
+            {
+                //   endpoints.MapHealthChecks("/health");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

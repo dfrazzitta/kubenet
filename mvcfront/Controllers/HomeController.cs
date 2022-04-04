@@ -63,6 +63,7 @@ namespace mvcfront.Controllers
 
         public IActionResult Index()
         {
+             /*
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
 
             int ct = ipHostInfo.AddressList.Count();
@@ -76,6 +77,8 @@ namespace mvcfront.Controllers
             IPAddress ipAddress = ipHostInfo.AddressList[0];
 
             ViewData["ip"] = sb.ToString();
+            */
+
             _logger.LogDebug("enter Index");
             return View();
         }
@@ -129,9 +132,18 @@ namespace mvcfront.Controllers
             return View(groups);
         }
 
-        public IActionResult Privacy()
+
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> Privacy()
+       // public IActionResult Privacy()
         {
-            return View();
+            if (new System.Random().NextDouble() > 0.5)
+            {
+                throw new System.Exception("test exception");
+            }
+
+            return new string[] { "value1", "value2" };
+           // return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

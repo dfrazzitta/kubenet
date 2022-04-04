@@ -225,3 +225,4 @@ G:\f16kube\kubenet\apiback\obj\Debug\net5.0\staticwebassets\apiback.StaticWebAss
 G:\f16kube\kubenet\apiback\obj\Debug\net5.0\apiback.RazorTargetAssemblyInfo.cache
 G:\f16kube\kubenet\apiback\obj\Debug\net5.0\apiback.csproj.CopyComplete
 G:\f16kube\kubenet\apiback\obj\Debug\net5.0\apiback.genruntimeconfig.cache
+G:\f16kube\kubenet\apiback\obj\Debug\net5.0\apiback.csproj.AssemblyReference.cache

@@ -6,7 +6,7 @@ ENV ASPNETCORE_URLS=http://+:5000
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-        arping \
+       # arping \
         arptables \
         bridge-utils \
         ca-certificates \
@@ -68,4 +68,12 @@ RUN dotnet publish "mvcfront.csproj" -c Release -o /app/publish /p:UseAppHost=fa
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+#RUN useradd docker && echo "docker:docker" | chpasswd
+#RUN mkdir -p /home/docker && chown -R docker:docker /home/docker
+#USER docker
+
+ 
+
+
 ENTRYPOINT ["dotnet", "mvcfront.dll"]

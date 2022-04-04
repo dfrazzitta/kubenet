@@ -1,3 +1,4 @@
+name: dockercompose5428643214091499088
 services:
   apiback:
     build:
@@ -9,7 +10,7 @@ services:
     ports:
     - mode: ingress
       target: 5001
-      published: 5001
+      published: "5001"
       protocol: tcp
   mvcfront:
     build:
@@ -33,7 +34,7 @@ services:
       protocol: tcp
     - mode: ingress
       target: 5000
-      published: 5000
+      published: "5000"
       protocol: tcp
     volumes:
     - type: bind
@@ -52,7 +53,7 @@ services:
     ports:
     - mode: ingress
       target: 1433
-      published: 1433
+      published: "1433"
       protocol: tcp
 networks:
   default:
