@@ -64,6 +64,7 @@ namespace mvcfront.Controllers
         public IActionResult Index()
         {
             // more index 
+            //opiiiiuuu
             // more change
              /*
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
